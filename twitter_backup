@@ -1,8 +1,20 @@
-#!/bin/sh
+#!/bin/bash
 RUBY_EXEC=`which ruby`
 if [ -n "$RUBY_EXEC" ]; then
   "$RUBY_EXEC" -x $0 $1 $2 $3
   exit $?
+else
+  echo 'Ruby not found! Install? (y/n) [y]'
+  read INST
+  if [[ -n "$INST" && "$INST" != "y" && "$INST" != "Y" ]]; then
+    exit 1
+  else
+    echo 'Installing'
+    bash -s stable < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
+    source "~/.bash_profile"
+    rvm install 1.9.3
+    "$RUBY_EXEC" -x $0 $1 $2 $3
+  fi
 fi
 
 #!/usr/bin/env ruby -w

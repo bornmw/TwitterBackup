@@ -72,6 +72,9 @@ csv = CSV.new f, {headers: ['id_str', 'created_at', 'text'], write_headers: true
 counter = 0
 last_id_str = nil
 while true
+  unless last_id_str.nil?
+    last_id_str = (last_id_str.to_i - 1).to_s
+  end
   timeline_part = get_timeline_part(ARGV[0], 100, last_id_str)
   if timeline_part.length == 0
     puts 'Done!'

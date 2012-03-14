@@ -1,0 +1,5 @@
+<h1>Twitter Backup</h1>
+This projects does exactly this: copies your tweets to a CSV file.
+
+It is a combination of bash script and Ruby code. If Ruby is not installed
+the script runs automatic installation.

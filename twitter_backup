@@ -12,7 +12,7 @@ else
   done
   echo 'Installing'
   bash -s stable < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
-  source ~/.rvm/scripts/rvm
+  source ~/.bash_profile
   rvm --default install 1.9.3
   RUBY_EXEC=`which ruby`
   if [ -n "$RUBY_EXEC" ]; then
@@ -38,7 +38,7 @@ end
 def get_timeline_part(screen_name, count, max_id = nil)
   args = {include_entities: 0, include_rts: 0,
           screen_name: screen_name, count: count, trim_user: 1,
-          page: 2, max_id: max_id}
+          max_id: max_id}
   USER_TIMELINE_URI.query = URI.encode_www_form(args)
   http = Net::HTTP.new(USER_TIMELINE_URI.host, USER_TIMELINE_URI.port)
   http.use_ssl = true

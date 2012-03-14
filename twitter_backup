@@ -4,23 +4,23 @@ if [ -n "$RUBY_EXEC" ]; then
   "$RUBY_EXEC" -x $0 $1 $2 $3
   exit $?
 else
-  echo 'Ruby not found! Install? (y/n) [y]'
-  read INST
-  if [ "$INST" != "yes" ]; then
-    exit 1
+  echo 'Ruby not found!'
+  echo 'Installing in 10 sec (press Ctrl-C NOW to exit)'
+  for in in {1..10}; do
+    echo -n '. '
+    sleep 1
+  done
+  echo 'Installing'
+  bash -s stable < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
+  source ~/.rvm/scripts/rvm
+  rvm --default install 1.9.3
+  RUBY_EXEC=`which ruby`
+  if [ -n "$RUBY_EXEC" ]; then
+    "$RUBY_EXEC" -x $0 $1 $2 $3
+    exit $?
   else
-    echo 'Installing'
-    bash -s stable < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
-    source ~/.rvm/scripts/rvm
-    rvm --default install 1.9.3
-    RUBY_EXEC=`which ruby`
-    if [ -n "$RUBY_EXEC" ]; then
-      "$RUBY_EXEC" -x $0 $1 $2 $3
-      exit $?
-    else
-      echo 'Ruby installation failed, please install manually.'
-      exit 2
-    fi
+    echo 'Ruby installation failed, please install manually.'
+    exit 2
   fi
 fi
 

@@ -6,7 +6,7 @@ if [ -n "$RUBY_EXEC" ]; then
 else
   echo 'Ruby not found! Install? (y/n) [y]'
   read INST
-  if [[ -n "$INST" && "$INST" != "y" && "$INST" != "Y" ]]; then
+  if [ "$INST" != "yes" ]; then
     exit 1
   else
     echo 'Installing'

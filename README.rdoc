@@ -7,9 +7,7 @@ If Ruby is not installed the script runs automatic installation with RVM.
 
 == Usage:
 
-  $ wget https://raw.github.com/bornmw/TwitterBackup/master/twitter_backup
-
-or, if you don't have wget:
+First of all you will need curl to be present in your system. That's RVM requirement not mine. Then:
 
   $ curl https://raw.github.com/bornmw/TwitterBackup/master/twitter_backup > twitter_backup
 

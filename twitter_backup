@@ -35,7 +35,15 @@ require 'csv'
 require 'json'
 require "net/http"
 
-USER_TIMELINE_URI = URI.parse("https://api.twitter.com/1/statuses/user_timeline.json")
+@proto = 'http'
+begin
+  require 'openssl'
+  @proto << 's'
+rescue LoadError
+  puts 'SSL support not found, will use HTTP'
+end
+
+USER_TIMELINE_URI = URI.parse(@proto + '://api.twitter.com/1/statuses/user_timeline.json')
 
 def usage
   puts 'Usage: twitter_backup.sh screen_name [file_name]'
@@ -47,8 +55,10 @@ def get_timeline_part(screen_name, count, max_id = nil)
           max_id: max_id}
   USER_TIMELINE_URI.query = URI.encode_www_form(args)
   http = Net::HTTP.new(USER_TIMELINE_URI.host, USER_TIMELINE_URI.port)
-  http.use_ssl = true
-  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+  if @proto == 'https'
+  	http.use_ssl = true
+  	http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+  end
 
   request = Net::HTTP::Get.new(USER_TIMELINE_URI.request_uri)
 

@@ -12,3 +12,8 @@ $ wget https://raw.github.com/bornmw/TwitterBackup/master/twitter_backup
 $ chmod a+x twitter_backup
 
 $ ./twitter_backup your_twitter_name
+
+== Troubleshooting
+
+There's a common RVM Ruby installation issue with not being able to handle SSL/HTTPS.
+Please look at this link for the workaround: http://beginrescueend.com/packages/openssl/

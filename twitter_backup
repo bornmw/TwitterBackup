@@ -22,7 +22,7 @@ else
   if [ -n "$RUBY_EXEC" ]; then
     "$RUBY_EXEC" -x $0 $1 $2
     EXT=$?
-    echo 'Please execute: source ~/.bash_profile'
+    echo 'To finalize Ruby installation execute: source ~/.bash_profile'
     exit $EXT
   else
     echo 'Ruby installation failed, please install manually.'

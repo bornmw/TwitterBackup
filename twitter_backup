@@ -82,7 +82,7 @@ if ARGV.length == 0
   exit 1
 end
 
-f = File.new 'TwitterBackup.csv', 'a'
+f = File.new ARGV[1].nil? ? 'TwitterBackup.csv' : ARGV[1], 'a'
 csv = CSV.new f, {headers: ['id_str', 'created_at', 'text'], write_headers: true}
 
 counter = 0

@@ -16,8 +16,10 @@ else
   rvm --default install 1.9.3
   RUBY_EXEC=`which ruby`
   if [ -n "$RUBY_EXEC" ]; then
-  "$RUBY_EXEC" -x $0 $1 $2
-    exit $?
+    "$RUBY_EXEC" -x $0 $1 $2
+    EXT = $?
+    echo 'Please execute: source ~/.bash_profile'
+    exit $EXT
   else
     echo 'Ruby installation failed, please install manually.'
     exit 2

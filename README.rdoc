@@ -20,7 +20,11 @@ $ ./twitter_backup your_twitter_name
 == Troubleshooting
 
 There's a common RVM Ruby installation issue with not being able to handle SSL/HTTPS.
+
 In most cases it can be fixed by installing openssl development packages *prior* to installing Ruby.
-For example, in Fedora 16 you should runt this: $ yum install openssl-devel.
+
+For example, in Fedora 16 you should run this: $ yum install openssl-devel.
+
 If it doesn't help please look at this link for the workaround: http://beginrescueend.com/packages/openssl/
+
 Anyway, if Ruby is installed without SSL support the Twitter Backup script uses HTTP instead of HTTS.

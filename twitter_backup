@@ -68,7 +68,7 @@ def get_timeline_part(screen_name, count, max_id = nil)
     response = http.request(request)
     JSON response.body
   rescue
-    puts "Failed to parse (#{attempt}): " + response.body.scan(/title>(.+)<\/title/)[0]
+    puts "Failed to parse (#{attempt}): " + response.body.scan(/title>(.+)<\/title/)[0][0]
     if attempt < 3 then
       retry
     else
@@ -91,7 +91,7 @@ while true
   unless last_id_str.nil?
     last_id_str = (last_id_str.to_i - 1).to_s
   end
-  timeline_part = get_timeline_part(ARGV[0], 100, last_id_str)
+  timeline_part = get_timeline_part(ARGV[0], 150, last_id_str)
   unless timeline_part.is_a? Array
     p 'Error! ' + timeline_part['error']
     exit 4

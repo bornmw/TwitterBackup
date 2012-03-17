@@ -12,13 +12,17 @@ else
   done
   echo 'Installing'
   bash -s stable < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
-  source ~/.bash_profile
+  if [ -e ~/.bash_profile ]; then
+    source ~/.bash_profile
+  else
+    source ~/.rvm/scripts/rvm
+  fi
   rvm --default install 1.9.3
   RUBY_EXEC=`which ruby`
   if [ -n "$RUBY_EXEC" ]; then
     "$RUBY_EXEC" -x $0 $1 $2
-    EXT = $?
-    echo 'Please execute: source ~/.bash_profile'
+    EXT=$?
+    echo 'To finalize Ruby installation execute: source ~/.bash_profile'
     exit $EXT
   else
     echo 'Ruby installation failed, please install manually.'
@@ -31,7 +35,15 @@ require 'csv'
 require 'json'
 require "net/http"
 
-USER_TIMELINE_URI = URI.parse("https://api.twitter.com/1/statuses/user_timeline.json")
+@proto = 'http'
+begin
+  require 'openssl'
+  @proto << 's'
+rescue LoadError
+  puts 'SSL support not found, will use HTTP'
+end
+
+USER_TIMELINE_URI = URI.parse(@proto + '://api.twitter.com/1/statuses/user_timeline.json')
 
 def usage
   puts 'Usage: twitter_backup.sh screen_name [file_name]'
@@ -43,8 +55,10 @@ def get_timeline_part(screen_name, count, max_id = nil)
           max_id: max_id}
   USER_TIMELINE_URI.query = URI.encode_www_form(args)
   http = Net::HTTP.new(USER_TIMELINE_URI.host, USER_TIMELINE_URI.port)
-  http.use_ssl = true
-  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+  if @proto == 'https'
+  	http.use_ssl = true
+  	http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+  end
 
   request = Net::HTTP::Get.new(USER_TIMELINE_URI.request_uri)
 
@@ -68,7 +82,7 @@ if ARGV.length == 0
   exit 1
 end
 
-f = File.new 'TwitterBackup.csv', 'a'
+f = File.new ARGV[1].nil? ? 'TwitterBackup.csv' : ARGV[1], 'a'
 csv = CSV.new f, {headers: ['id_str', 'created_at', 'text'], write_headers: true}
 
 counter = 0

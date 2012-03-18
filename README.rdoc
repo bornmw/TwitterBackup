@@ -16,7 +16,7 @@ First of all you will need curl to be present in your system. That's RVM require
   $ ./twitter_backup your_twitter_name
 
 ===Windows
-Download this file to your disk (open it in browser and Save As twitter_backup.wsf): https://raw.github.com/bornmw/TwitterBackup/master/twitter_backup.wsf
+Download this file to your disk (save as twitter_backup.wsf): https://github.com/downloads/bornmw/TwitterBackup/twitter_backup.wsf
 
 Execute the file. Enter your screen name. A file with tweets backup will appear as TwitterBackup.csv in the folder you saved twitter_backup.wsf to.
 

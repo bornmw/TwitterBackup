@@ -2,14 +2,14 @@
 
 This project does exactly this: copies your tweets to a CSV file.
 
-It is a combination of bash script and Ruby code.
-If Ruby is not installed the script runs automatic installation with RVM.
+It is single file that is a hybrid of bash script, windows shell and Ruby code.
+If Ruby is not installed the script runs automatic installation with RVM on Linux and RubyInstaller on Windows.
 
 == Usage:
 ===Linux/OSX
 First of all you will need curl to be present in your system. That's RVM requirement not mine. Then:
 
-  $ curl https://raw.github.com/bornmw/TwitterBackup/master/twitter_backup > twitter_backup
+  $ curl https://raw.github.com/bornmw/TwitterBackup/master/twitter_backup.wsf > twitter_backup
 
   $ chmod a+x twitter_backup
 

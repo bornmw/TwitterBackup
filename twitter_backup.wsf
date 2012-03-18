@@ -76,7 +76,7 @@ Set wshShell = WScript.CreateObject ("WSCript.shell")
 Result = InputBox("Twitter user name", "User Name", "yourname", 100, 100)
 Result = "C:\Ruby193\bin\ruby -x twitter_backup.wsf " + Result
 WshShell.Popup(Result)
-wshshell.run Result, 6, True
+wshshell.run Result, 1, True
 set wshshell = nothing
 
 WScript.Quit

@@ -65,7 +65,7 @@ Set wshShell = WScript.CreateObject ("WSCript.shell")
 On Error Resume Next
 wshshell.run "ruby -version", 6, True
 If Err.Number <> 0 Then
-  WshShell.Popup(Err.Number)
+  WshShell.Popup("Ruby not found in PATH, will download (9Mb) and install. " + Err.Number)
   ruby_install
   Err.Clear
 End If

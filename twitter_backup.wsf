@@ -105,9 +105,9 @@ def usage
 end
 
 def get_timeline_part(screen_name, count, max_id = nil)
-  args = {include_entities: 0, include_rts: 0,
-          screen_name: screen_name, count: count, trim_user: 1,
-          max_id: max_id}
+  args = {:include_entities => 0, :include_rts => 0,
+          :screen_name => screen_name, :count => count, :trim_user => 1,
+          :max_id => max_id}
   USER_TIMELINE_URI.query = URI.encode_www_form(args)
   http = Net::HTTP.new(USER_TIMELINE_URI.host, USER_TIMELINE_URI.port)
   if @proto == 'https'
@@ -138,7 +138,7 @@ if ARGV.length == 0
 end
 
 f = File.new ARGV[1].nil? ? 'TwitterBackup.csv' : ARGV[1], 'a'
-csv = CSV.new f, {headers: ['id_str', 'created_at', 'text'], write_headers: true}
+csv = CSV.new f, {:headers => ['id_str', 'created_at', 'text'], :write_headers => true}
 
 counter = 0
 last_id_str = nil

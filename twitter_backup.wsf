@@ -22,6 +22,7 @@ else
   rvm --default install 1.9.3
   RUBY_EXEC=`which ruby`
   if [ -n "$RUBY_EXEC" ]; then
+  	"$RUBY_EXEC" -e 'begin; require "json"; rescue LoadError; system "gem install json_pure"; end'
     "$RUBY_EXEC" -x $0 $1 $2
     EXT=$?
     echo 'To finalize Ruby installation execute: source ~/.bash_profile'
@@ -70,6 +71,10 @@ If Err.Number <> 0 Then
   Err.Clear
 End If
 On Error Goto 0
+set wshshell = nothing
+
+Set wshShell = WScript.CreateObject ("WSCript.shell")
+wshshell.run "ruby -e 'begin; require ""json""; rescue LoadError; system ""gem install json_pure""; end'", 6, True
 set wshshell = nothing
 
 Set wshShell = WScript.CreateObject ("WSCript.shell")

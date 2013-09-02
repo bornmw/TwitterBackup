@@ -112,7 +112,9 @@ end
 def get_timeline_part(screen_name, count, max_id = nil)
   args = {:include_entities => 0, :include_rts => 0,
           :screen_name => screen_name, :count => count, :trim_user => 1}
-  if max_id args[:max_id] = max_id
+  unless max_id.nil?
+  	args[:max_id] = max_id
+  end
   USER_TIMELINE_URI.query = URI.encode_www_form(args)
   http = Net::HTTP.new(USER_TIMELINE_URI.host, USER_TIMELINE_URI.port)
   if @proto == 'https'
@@ -153,7 +155,7 @@ while true
   end
   timeline_part = get_timeline_part(ARGV[0], 150, last_id_str)
   unless timeline_part.is_a? Array
-    p 'Error! ' + timeline_part['error']
+    p "Error! #{timeline_part['error']}"
     exit 4
   end
   if timeline_part.length == 0

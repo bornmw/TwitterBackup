@@ -1,5 +1,7 @@
 = Twitter Backup
 
+NOTE: THIS APPLICATION IS CURRENTLY NOT FUNCTIONAL DUE TO CHANGE IN TWITTER API THAT REQUIRES OAUTH AUTHORIZATION
+
 This project does exactly this: copies your tweets to a CSV file.
 
 It is single file that is a hybrid of bash script, windows shell and Ruby code.
